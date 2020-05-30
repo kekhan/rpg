@@ -3,13 +3,16 @@
 <head>
 	<title>Attack and Run</title>
 	<style>
+	body{
+		margin: 0;
+	}
 
 	</style>
 </head>
 <body onload="start_game()">
-	<canvas id ="canvas">
-
-	</canvas>
+	<div id = 'wrapper' style='width: 600px; height: 600px; overflow: hidden;' >
+		<canvas id = 'canvas'></canvas>
+	</div>
 	<script src="game.js"></script>
 </body>
 </html>

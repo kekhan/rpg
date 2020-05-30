@@ -8,6 +8,8 @@ http://www.allacrost.org/media/art/sprites_map_claudius.png
 MAP:: https://media.indiedb.com/cache/images/games/1/32/31122/thumb_620x2000/master-tileset.png
 */
 var canvas = document.getElementById('canvas');
+var wrapper = document.getElementById('wrapper');
+
 var context = canvas.getContext('2d');
 var c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -56,8 +58,15 @@ var tileMap =[[1,32,32,32,32,32,1,1,1,1]
 ,[1,32,32,1,1,1,1,32,1,32]
 ,[1,1,1,1,32,10,33,32,1,32]
 ,[1,32,32,1,1,1,1,1,1,1]
+,[1,32,32,1,1,1,1,32,1,32]
+,[1,1,1,1,32,10,33,32,1,32]
+,[1,32,32,1,1,1,1,1,1,1]
+,[1,1,1,1,32,32,39,32,1,32]
+,[1,32,32,1,1,1,1,32,1,32]
+,[1,1,1,1,32,10,33,32,1,32]
+,[1,32,32,1,1,1,1,1,1,1]
 ];
-var level2 =[[32,32,32,32,32,32,1,1,32,1]
+var level2 =[[1,32,32,32,32,32,1,1,32,1]
 ,[1,1,1,1,1,32,1,32,32,32]
 ,[1,32,32,32,1,32,32,1,1,32]
 ,[1,32,32,32,1,32,32,32,1,32]
@@ -67,6 +76,12 @@ var level2 =[[32,32,32,32,32,32,1,1,32,1]
 ,[1,32,32,1,1,1,1,32,1,32]
 ,[1,1,1,1,32,10,33,32,1,1]
 ,[1,32,32,32,1,1,1,1,1,1]
+,[1,1,1,1,32,10,33,32,1,32]
+,[1,32,32,1,1,1,1,1,1,1]
+,[1,1,1,1,32,32,39,32,1,32]
+,[1,32,32,1,1,1,1,32,1,32]
+,[1,1,1,1,32,10,33,32,1,32]
+,[1,32,32,1,1,1,1,1,1,1]
 ];
 maplevel = Array.from(tileMap);
 
@@ -74,8 +89,8 @@ const online = false;
 
 //size of each cell
 var mapIndexOffset = -1;
-var mapRows = tileMap.length;
-var mapCols = tileMap[0].length;
+var mapRows = maplevel.length;
+var mapCols = maplevel[0].length;
 
 function drawSheet(level){
   for(var row=0; row<mapRows; row++){
@@ -146,8 +161,10 @@ function Game_Object(img,x,y,width,height,srcWidth,srcHeight,col,row,mainPlayer)
 		/*This functions draws the objects to the screen*/
 		//console.log("actor");
 
+
 		context.drawImage(this.img,this.srcX,this.srcY,
 			this.width,this.height,this.x,this.y,this.width,this.height);
+
 	}
 
   this.update = function(){
@@ -208,6 +225,11 @@ function Game_Object(img,x,y,width,height,srcWidth,srcHeight,col,row,mainPlayer)
     console.log(x,y);
     if(tileMap[x][y] == 39){
       maplevel = Array.from(level2);
+      mapRows = maplevel.length;
+      mapCols = maplevel[0].length;
+
+      this.x = 0;
+      this.y = 0;
 
 
     }
@@ -223,15 +245,20 @@ function animate(){
     //boyplayer.update();
 
     context.clearRect(this.x,this.y,this.width,this.height);
+
     manPlayer.update();
     coin.update();
     drawSheet(maplevel);
+    wrapper.scrollTop = manPlayer.y-100;
+    wrapper.scrollLeft = manPlayer.x-100;
 
 
 
     // this.draw does not render both players on screen in update function
     // calling draw method here renders both chacters
     //boyplayer.draw();
+
+
 
     manPlayer.draw();
     coin.draw();
