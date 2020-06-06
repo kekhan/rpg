@@ -18,7 +18,6 @@ let level1 = true;
 
 
 // SPRITE SHEETS OF GAME WORLD
-var girl = "https://comps.gograph.com/pinky-girl-game-sprites_gg84225487.jpg";
 var spriteRunner="https://i.pinimg.com/originals/d3/78/99/d37899c20bb6dda3da5e1971e2a45f61.png";
 const man ="http://www.allacrost.org/media/art/sprites_map_claudius.png";
 const map = "https://media.indiedb.com/cache/images/games/1/32/31122/thumb_620x2000/master-tileset.png";
@@ -33,7 +32,6 @@ var newIma = new Image();
 var manimage = new Image();
 var coinImg = new Image();
 coinImg.src = coins;
-newIma.src = girl;
 manimage.src = man;
 manimage.height = 20;
 charImage.src = spriteRunner;
@@ -41,8 +39,7 @@ var tileSheet = new Image();
 tileSheet.src = map;
 
 // add main player boolean
-var boyplayer = new Game_Object(charImage,0,10,10,10,864,280,8,2,false);
-var girlplayer = new Game_Object(newIma,0,400,30,30,400,397,5,2,false);
+var boyplayer = new Game_Object(charImage,0,100,10,10,864,280,8,2,false);
 //const manPlayer = new Game_Object(manimage,0,500,30,30,1000,362,8,2);
 const manPlayer = new Game_Object(manimage,0,530,20,20,192,256,6,4,true);
 const coin = new Game_Object(coinImg,100,100,30,30,256,32,8,1,false);
@@ -172,13 +169,7 @@ function Game_Object(img,x,y,width,height,srcWidth,srcHeight,col,row,mainPlayer)
 
   context.clearRect(0,0,canvas.width,canvas.height);
 
-  /*if(canvas.key == false){
-    current_frame = current_frame;
-  }
-  else{
-    current_frame = ++current_frame % this.col;
-    console.log("currentFrame", current_frame);
-  }*/
+
   current_frame = ++current_frame % this.col;
 
   this.srcX = current_frame * this.width;
@@ -191,9 +182,12 @@ function Game_Object(img,x,y,width,height,srcWidth,srcHeight,col,row,mainPlayer)
   this.changeLevel(step_x,step_y);
 
   if(mainPlayer){
+    this.srcX = 0 * this.width;
+
+
     if(tileMap[step_x][step_y] == 32){
       this.y = -this.y;
-      this.x = -this.x ;
+      this.x = -this.x;
 
     }
 
@@ -201,22 +195,30 @@ function Game_Object(img,x,y,width,height,srcWidth,srcHeight,col,row,mainPlayer)
       if(canvas.key == 37){
         this.srcY = 1*this.height;
         this.x-=this.velocity;
+        this.srcX = current_frame * this.width;
         this.bounds();
       }
       else if (canvas.key == 39) {
         this.srcY = 3*this.height;
         this.x+=this.velocity;
+        this.srcX = current_frame * this.width;
         this.bounds();
       }
       else if(canvas.key == 40){
         this.srcY = 0*this.height;
         this.y+=this.velocity;
+        this.srcX = current_frame * this.width;
         this.bounds();
       }
       else if(canvas.key == 38){
         this.srcY = 2*this.height;
         this.y-=this.velocity;
+        this.srcX = current_frame * this.width;
         this.bounds();
+      }
+      else if (canvas.key == 32) {
+        maplevel[step_x][step_y] = 33;
+
       }
 
   	}
@@ -248,15 +250,16 @@ function animate(){
 
     manPlayer.update();
     coin.update();
-    drawSheet(maplevel);
     wrapper.scrollTop = manPlayer.y-100;
     wrapper.scrollLeft = manPlayer.x-100;
+
 
 
 
     // this.draw does not render both players on screen in update function
     // calling draw method here renders both chacters
     //boyplayer.draw();
+    drawSheet(maplevel);
 
 
 
@@ -266,8 +269,10 @@ function animate(){
 
 
 
+
+
     setTimeout(function(){
 
       window.requestAnimationFrame(animate);
-    },100);
+    },150);
   }
