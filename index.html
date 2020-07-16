@@ -3,17 +3,41 @@
 <head>
 	<title>JS-RPG</title>
 	<style>
+
+
+	#wrapper{
+		padding-top: 5%;
+		padding-left: 20%
+	}
 	body{
-		margin: 0;
 		background: black;
 	}
-	#wrapper{
-		padding: 100px;
-	}
+
+
+
 
 	</style>
+	<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </head>
 <body onload="start_game()">
+	<header>
+
+		<nav style="width: 100%">
+	    <div class="nav-wrapper" style="background:#A2A0E1">
+	      <a href="#" class="brand-logo" style="padding:.5%">	JS-Dungeon-Game</a>
+	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a href="https://kerinkhan.me/">Home</a></li>
+	        <li><a href="TechDocs.html">Documentations</a></li>
+
+	      </ul>
+	    </div>
+	  </nav>
+	</header>
 	<div id = 'wrapper' style='width: 600px; height: 600px; overflow: hidden;' >
 		<canvas id = 'canvas'></canvas>
 	</div>
