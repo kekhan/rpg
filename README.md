@@ -6,7 +6,7 @@ This is a Javascript Role-Playning Game. This Document will show users how to pl
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup Repository](#setup)
-* [Html5 Canvas Setup](#game_setup)
+* [Html5 Canvas Game Setup](#html5_canvas_game_setup)
 * [Usage](#usage)
 * [Play Guide](#play_guide)
 * [Features](#features)
@@ -60,7 +60,7 @@ This guide demonstrates Html5 canvas used in a 2d tilemap game. Html5 Canvas is 
 ## Usage
 ![game](/rpg.png)
 Demo:(http://kerinkhan.me/rpg/index.html)
-## Game Play
+## Play Guide
 The following instructions are the game play.
 ## Features
 List of features ready and TODO for future features
