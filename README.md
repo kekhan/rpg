@@ -1,5 +1,6 @@
 # Javascript Role-Playing Game
 * http://kerinkhan.me/rpg/index.html
+
 This is a Javascript Role-Playning Game. This Document will show users how to play and create a JS game.
 
 ## Table of contents
